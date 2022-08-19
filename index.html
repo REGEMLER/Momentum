@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/owfont-regular.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <title>Momentum</title>
+</head>
+
+<body>
+    <div class="language">
+        <div class="flag"></div>
+        <p class="lenguage-text">EN</p>
+    </div>
+    <header>
+        <div class="header-container">
+            <div class="player">
+                <div class="player-data">
+                    <div class="player-controls">
+                        <div class="player-btn" id="play_btnPrev"><img src="assets/previous.png" alt="player-btn">
+                        </div>
+                        <div class="player-btn" id="play_btn"><img id="playIcon"
+                                src="assets/premium-icon-play-button-4980098.png" alt="player-btn"></div>
+                        <div class="player-btn" id="play_btnNext"><img src="assets/next.png" alt="player-btn"></div>
+                    </div>
+                    <h2 class="play-title">Aqua Caelestis</h2>
+                    <div class="progress-container">
+                        <div class="progress-inner"></div>
+                    </div>
+                    <div class="player-time">
+                        <span class="current-time">0:00</span>
+                        <span>/</span>
+                        <span class="full-time"></span>
+                    </div>
+                    <div class="sound-container">
+                        <div class="sound-inner"></div>
+                    </div>
+                    <div class="mute">
+                        <div class="player-sounds">
+                            <div class="player-sound"><img class="player-sound_img"
+                                    src="assets/premium-icon-sound-3980158.png" alt="player-sound"></div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="play-list" id="play-list">
+                </ul>
+            </div>
+            <div class="weather">
+                <input type="text" class="city" id="city">
+                <div class="wheather-error">Возникла ошибка!</div>
+                <div class="wheather-description">
+                    <i class="weather-icon owf"></i>
+                    <div class="temperature"></div>
+                    <div class="weather-description"></div>
+                    <div class="wind"></div>
+                    <div class="humidity"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="main-container">
+            <div class="arrow-left" id="arrow-left"><img src="assets/arrowBack.png" alt=""></div>
+            <div class="arrow-right" id="arrow-right"><img src="assets/arrowNext.png" alt=""></div>
+            <div class="main-date-container">
+                <div class="main-time" id="main-time"></div>
+                <div class="main-date" id="main-date"></div>
+            </div>
+            <div class="main-greating">
+                <div class="greating" id="greating"></div>
+                <input type="text" class="name" placeholder="[Enter name]" id="userName">
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-inner">
+                <div class="footer-adj"><img src="assets/Izobrazhenie-16-6.png" alt="adj"></div>
+                <div class="footer-rs"><a class="footer-link" href="https://rs.school/js-stage0/"><img src="assets/logo-rs.svg" alt=""></a></div>
+             </div>
+            <div class="footer-quote">
+                <div class="footer-btn"><img src="assets/refresh.png" alt="footer-btn"></div>
+                <div class="quote"></div>
+                <div class="author"></div>
+            </div>
+            <button class="toDo-btn">ToDo List</button>
+        </div>
+    </footer>
+    </div>
+    <div class="toDo">
+        <div class="toDo-container">
+            <div id="toDoform">
+                <input type="text" id="toDoInput">
+                <input type="submit" id="toDoSubmit" value="Add ToDo">
+            </div>
+            <ul class="toDo-list">
+            </ul>
+        </div>
+    </div>
+    <div class="adj">
+        <div class="adj-container">
+            <h2 class="adj-title">Settings</h2>
+            <div class="adj-lenguage adj-item">
+                <p class="adj-text adj-text1">Select lenguage</p>
+                <input type="radio" id="lenguage1" name="lenguage" value="en" checked>
+                <label for="lenguage1">English</label>
+                <input type="radio" id="lenguage2" name="lenguage" value="ru">
+                <label for="lenguage2">Русский</label>
+            </div>
+            <div class="adj-bg adj-item">
+                <p class="adj-text adj-text2">Select background</p>
+                <input type="radio" id="bg1" name="bg" value="GITHUB" checked>
+                <label for="bg1">GITHUB</label>
+                <input type="radio" id="bg2" name="bg" value="Unsplash">
+                <label for="bg2">Unsplash</label>
+                <input type="radio" id="bg3" name="bg" value="Flickr">
+                <label for="bg3">Flickr</label>
+            </div>
+            <div class="adj-show adj-item">
+                <p class="adj-text adj-text3">Show/Close blocks</p>
+                <input type="checkbox" id="forPlayer" checked>
+                <label id="playerLabel" for="forPlayer">Show player</label>
+                <input type="checkbox" id="forWheather" checked>
+                <label id="wheatherLabel" for="forWheather">Show wheather</label>
+                <input type="checkbox" id="forClock" checked>
+                <label id="timeLabel" for="forClock">Show time</label>
+                <input type="checkbox" id="forGreating" checked>
+                <label id="greatingLabel" for="forGreating">Show greating</label>
+                <input type="checkbox" id="forCite" checked>
+                <label id="quoteLabel" for="forCite">Show quote</label>
+            </div>
+        </div>
+        <script type="module" src="js/lang.js"></script>
+        <script type="module" src="js/playList.js"></script>
+        <script type="module" src="js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,687 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 480px;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+}
+
+/* Иконка выбора языка */
+.language {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flag {
+    width: 30px;
+    height: 30px;
+    background-image: url(../assets/free-icon-united-kingdom-197374.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 5px;
+}
+
+.lenguage-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+}
+
+/* Погода и аудио */
+.header-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 30vh;
+    min-height: 220px;
+}
+
+.player {
+    transition: all 1s linear;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-btn {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.player-btn img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.play-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin: 10px 20px;
+}
+
+
+.progress-container {
+    width: 300px;
+    height: 14px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.progress-inner {
+    background-color: rgb(41, 182, 41);
+    height: 8px;
+    border-radius: 5px;
+}
+
+.player-time {
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.player-time span {
+    padding: 2px;
+
+}
+
+.sound-container {
+    width: 300px;
+    height: 14px;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.sound-inner {
+    background-color: blue;
+    height: 8px;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.mute {
+    display: flex;
+    justify-content: flex-end;
+    width: 300px;
+    margin: 5px;
+}
+
+.player-sound {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.player-sound_img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.play-list {
+    list-style: none;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.play-item {
+    position: relative;
+    padding: 5px;
+    padding-left: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color: white;
+    list-style: none;
+    cursor: pointer;
+}
+
+.play-item_active {
+    color: green;
+}
+
+.play-item::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-weight: 900;
+}
+
+.weather {
+    row-gap: 5px;
+    width: 180px;
+    min-height: 180px;
+    text-align: left;
+    transition: all 1s linear;
+}
+
+.weather input {
+    width: 170px;
+    height: 35px;
+    padding: 5px;
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+}
+
+.wheather-description_passive {
+    display: none;
+}
+
+.wheather-error {
+    display: none;
+}
+
+.wheather-error_active {
+    display: block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 32px;
+    color: red;
+}
+
+.weather-icon {
+    font-size: 40px;
+    color: #fff;
+}
+
+.temperature,
+.weather-description,
+.wind,
+.humidity {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Приветствие и время  */
+.main-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    height: 40vh;
+    min-height: 260px;
+}
+
+.arrow-left {
+    position: absolute;
+    top: 50%;
+    left: 2%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.arrow-left img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 2%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.arrow-right img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.main-date-container {
+    width: 100%;
+    margin: 0 auto;
+    transition: all 1s linear;
+}
+
+.main-time {
+    width: 100%;
+    margin: 10px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 64px;
+    color: white;
+}
+
+.main-date {
+    width: 100%;
+    margin: 10px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 22px;
+    color: white;
+}
+
+.main-greating {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 44px;
+    color: white;
+    text-align: center;
+    transition: all 1s linear;
+}
+
+.main-greating input {
+    width: 50%;
+    padding: 10px;
+    font-size: 40px;
+    text-align: left;
+    color: #fff;
+    background-color: transparent;
+}
+
+.greating {
+    width: 50%;
+    text-align: right;
+}
+
+/* Цитата кнопка вызовы списка дел, настройки и иконки  */
+.footer-container {
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30vh;
+    min-height: 160px;
+}
+
+/* Кнопка настроек */
+.footer-adj {
+    width: 50px;
+    margin: 0 auto;
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.footer-adj img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ссылка на задание и на гитхаб  */
+
+.footer-rs {
+    width: 50px;
+    margin: 0 auto;
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.footer-rs img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Цитаты */
+.footer-btn {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.footer-btn img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-quote {
+    transition: all 1s linear;
+}
+
+.quote,
+.author {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 5px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+.author {
+    font-style: italic;
+}
+
+/* Кнопка вызовы списка дел */
+.toDo-btn {
+    width: 140px;
+    height: 40px;
+    background-color: rgb(5, 6, 31);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all .4s linear;
+}
+
+.toDo-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Список дел */
+.toDo {
+    position: absolute;
+    min-width: 200px;
+    width: 15%;
+    bottom: 20%;
+    right: 0;
+    background-color: #fff;
+    opacity: 0;
+    border-radius: 5px;
+    z-index: 2;
+    transform: translateX(105%);
+    transition: all 1s linear;
+}
+
+.toDo_active {
+    right: 5%;
+    transform: translateX(0);
+    opacity: 0.8;
+    transition: all 1s linear;
+}
+
+.toDo-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+#toDoform {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#toDoInput,
+#toDoSubmit {
+    display: block;
+    outline: none;
+    border: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+#toDoInput {
+    height: 40px;
+    width: 150px;
+    margin: 0 auto;
+    opacity: 0.5;
+    background-color: #FDFF94;
+}
+
+#toDoSubmit {
+    height: 40px;
+    width: 150px;
+    margin: 0 auto;
+    background-image: linear-gradient(#FDFF94, #733407);
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.toDo-list {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    list-style: none;
+}
+
+.todo-item {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #E4EE28;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.todo-text {
+    padding: 10px;
+}
+
+.list-buttons {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}
+
+.list-buttons i {
+    margin-left: 5px;
+}
+
+.fa-check-square {
+    color: green;
+}
+
+.fa-times {
+    color: red;
+}
+
+.todo-done {
+    background-color: #55D11D;
+}
+
+.todo-failed {
+    background-color: #BA0101;
+}
+
+/* Настройки */
+.adj {
+    min-width: 300px;
+    width: 20%;
+    position: absolute;
+    bottom: 1%;
+    padding: 8px;
+    left: 0%;
+    background-color: #fff;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 2;
+    transform: translateX(-105%);
+    transition: all 1s linear;
+}
+
+.adj_active {
+    left: 5%;
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 0.8;
+    transition: all 1s linear;
+}
+
+.adj-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.adj-item {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.adj-item label {
+    display: block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+
+.adj-title {
+    width: 100%;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    text-align: center;
+}
+
+.adj-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.invisible {
+    opacity: 0;
+    visibility: hidden;
+    transition: 1s all linear;
+}
+
+
+@media screen and (max-width: 740px) {
+    .header-container {
+        padding: 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+        min-height: 320px;
+    }
+
+    .player {
+        margin-bottom: 10px;
+    }
+
+    .play-list {
+        margin: 10px auto;
+        text-align: center;
+    }
+
+    .play-item::before {
+        content: "\2713";
+        position: absolute;
+        left: 25%;
+        top: 2px;
+        font-weight: 900;
+        padding-right: 5%;
+    }
+
+    .weather input {
+        width: 140px;
+    }
+
+    .weather-icon {
+        margin: 10px auto;
+    }
+
+    .temperature,
+    .weather-description,
+    .wind,
+    .humidity {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .main-container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 10px;
+        text-align: center;
+        height: 25vh;
+        min-height: 260px;
+        margin-top: 10px;
+    }
+
+    .main-time {
+        font-size: 42px;
+    }
+
+    .main-greating {
+        font-size: 30px;
+    }
+
+    .main-greating input {
+        font-size: 20px;
+    }
+
+    .footer-container {
+        width: 100%;
+        margin: 5px auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        height: 25vh;
+        min-height: 160px;
+    }
+
+    .toDo-btn,
+    .footer-quote {
+        margin-bottom: 20px;
+    }
+
+    .footer-inner {
+        margin-bottom: 20px;
+        order: -14;
+        display: flex;
+    }
+}
