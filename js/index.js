@@ -1,110 +1,15 @@
 import greetingTranslation from './lang.js';
-
-//  Настройки приложения
-//Показать/скрыть меню настроек 
-const adj = document.querySelector(".adj");
-const adjBtn = document.querySelector(".footer-adj");
-
-adj.addEventListener("click", (e)=>{
-    e.stopPropagation();
-})
-
-document.body.addEventListener("click", ()=>{
-    if(adj.classList.contains(`adj_active`)){
-        adj.classList.remove(`adj_active`);
-    } return false; 
-})
-
-const showAdj = (e) => {
-    e.stopPropagation();
-    if(adj.classList.contains(`adj_active`)){
-        adj.classList.remove(`adj_active`);
-    } else{
-        adj.classList.add(`adj_active`); 
-    }
-}
-adjBtn.addEventListener("click",showAdj);
-
-// Показать/скрыть отдельные элементы  
-const isPlayer = document.getElementById("forPlayer");
-
-const showPlayer = () => {
-    const block  =  document.querySelector(".player");
-    if(isPlayer.checked){
-        block.classList.remove("invisible");
-    } else {
-        block.classList.add("invisible");
-    }
-}
-
-isPlayer.addEventListener("input", showPlayer); 
-
-const isWheather = document.getElementById("forWheather");
-
-const showWhether = () => {
-    const block  =  document.querySelector(".weather");
-    if(isWheather.checked){
-        block.classList.remove("invisible");
-    } else {
-        block.classList.add("invisible");
-    }
-}
-isWheather.addEventListener("input", showWhether); 
-
-const isClock = document.getElementById("forClock");
-
-const showClock = () => {
-    const block  =  document.querySelector(".main-date-container");
-    if(isClock.checked){
-        block.classList.remove("invisible");
-    } else {
-        block.classList.add("invisible");
-    }
-}
-isClock.addEventListener("input", showClock); 
-
-const isGreating = document.getElementById("forGreating");
-
-const showGreating = () => {
-    const block  =  document.querySelector(".main-greating");
-    if(isGreating.checked){
-        block.classList.remove("invisible");
-    } else {
-        block.classList.add("invisible");
-    }
-}
-isGreating.addEventListener("input", showGreating); 
-
-const isQuote = document.getElementById("forCite");
-
-const showQuote = () => {
-    const block  =  document.querySelector(".footer-quote");
-    if(isQuote.checked){
-        block.classList.remove("invisible");
-    } else {
-        block.classList.add("invisible");
-    }
-}
-isQuote.addEventListener("input", showQuote);
+import { showPlayer } from './toggle.js';
+import { getWeather, getQuotes, getCityLocalStorage } from './weather.js';
+import { setLenguageInTODOBtn } from './todoList.js';
 
 //  Перевод приложения на два языка 
 const lenguageEN = document.getElementById("lenguage1");
 const lenguageRU = document.getElementById("lenguage2");
-let isEng = localStorage.getItem('localLang') ?? lenguageEN.checked;
-
-//Строка false преобразуется в true!
-if(isEng === "false"){
-    isEng = false; 
-}
-
-const setLangLocalStorage = () => {
-    localStorage.setItem("localLang", isEng);
-}
-
-let appLang = isEng ? greetingTranslation.en : greetingTranslation.ru;
+let language = localStorage.getItem('language') ?? "en";
+let appLang = greetingTranslation[language];
  
 const toggleLang = document.querySelector(".language");
-const todoSubmit = document.getElementById("toDoSubmit");
 
 //Язык настроек
 const setLenguageInSettings = () => {
@@ -139,34 +44,28 @@ const setLenguageInButtonLenguage = () => {
 setLenguageInButtonLenguage();
 
 const switchLang = () => {
-    if (isEng) {
+    if (language === "en") {
         appLang = greetingTranslation.ru;
-        setLenguageInButtonLenguage();
-        setLenguageInTODOBtn();
-        setLenguageInSettings();
-        getWeather();
-        getQuotes();
-        lenguageEN.checked = false; 
-        lenguageRU.checked = true;
-        isEng = !isEng;
+        language = "ru";
     } else {
         appLang = greetingTranslation.en;
-        setLenguageInButtonLenguage();
-        setLenguageInTODOBtn();
-        setLenguageInSettings();
-        getWeather();
-        getQuotes();
-        lenguageEN.checked = true; 
-        lenguageRU.checked = false;
-        isEng = !isEng;
+        language = "en";
     }
+    localStorage.setItem("language", language);
+    setLenguageInButtonLenguage();
+    setLenguageInTODOBtn();
+    setLenguageInSettings();
+    getWeather();
+    getQuotes();
+    getCityLocalStorage();
 }
 
 lenguageEN.addEventListener("input", switchLang);
 lenguageRU.addEventListener("input", switchLang);
 toggleLang.addEventListener("click", switchLang);
-window.addEventListener('beforeunload', setLangLocalStorage);
-
+window.addEventListener('beforeunload', () => {
+    localStorage.setItem("language", language);
+});
 
 //  Часы и календарь 
 //Получаем дату
@@ -228,182 +127,5 @@ const getLocalStorage = () => {
 
 window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('load', getLocalStorage);
-
-// Виджет погоды
-const city = document.getElementById("city");
-if (!city.value) {
-    city.value = appLang.defaultCity;
-}
-const setCityLocalStorage = () => {
-    localStorage.setItem("userCity", city.value)
-}
-const getCityLocalStorage = () => {
-    if (localStorage.getItem('userCity')) {
-        city.value = localStorage.getItem('userCity');
-    }
-}
-
-async function getWeather() {
-    const weatherError = document.querySelector('.wheather-error');
-    const wheatherDescription = document.querySelector('.wheather-description');
-    const weatherIcon = document.querySelector('.weather-icon');
-    const temperature = document.querySelector('.temperature');
-    const weatherDescription = document.querySelector('.weather-description');
-    const humidity = document.querySelector('.humidity');
-    const wind = document.querySelector('.wind');
-    if (!city.value) {
-        city.value = appLang.defaultCity;
-    }
-    try {
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${appLang.language}&appid=62979e0079fca9e440a6dff201386479&units=metric`;
-        const res = await fetch(url);
-        const data = await res.json();
-        const temper = Math.round(data.main.temp);
-        const windSpeed = Math.round(data.wind.speed);
-        const humid = Math.round(data.main.humidity);
-        weatherError.classList.remove("wheather-error_active");
-        wheatherDescription.classList.remove("wheather-description_passive");
-        weatherIcon.className = 'weather-icon owf';
-        weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-        temperature.textContent = `${appLang.wheather[0]} - ${temper}°C`;
-        weatherDescription.textContent = data.weather[0].description;
-        wind.textContent = `${appLang.wheather[1]} - ${windSpeed} ${appLang.wheather[2]}`;
-        humidity.textContent = `${appLang.wheather[3]} - ${humid}%`;
-    } catch (Error) {
-        weatherError.classList.add("wheather-error_active");
-        wheatherDescription.classList.add("wheather-description_passive");
-    }
-}
-city.addEventListener("change", (e) => {
-    getWeather();
-})
-city.addEventListener('keydown', (e) => {
-    if (e.keyCode === 13) {
-        e.stopPropagation();
-        getWeather();
-    }
-});
-city.addEventListener('blur', (e) => {
-    e.stopPropagation();
-    getWeather();
-});
-
-getWeather();
-window.addEventListener('beforeunload', setCityLocalStorage);
-window.addEventListener('load', getCityLocalStorage);
-
-
-// Виджет "цитата дня"
-const quoteBtn = document.querySelector('.footer-btn');
-
-async function getQuotes() {
-    const quote = document.querySelector('.quote');
-    const author = document.querySelector('.author');
-    const quotes = `${appLang.quote}`;
-    const res = await fetch(quotes);
-    const data = await res.json();
-    const dataSort = await data.sort(() => Math.random() - 0.5);
-    quote.textContent = dataSort[0].text;
-    author.textContent = dataSort[0].author;
-}
-
-quoteBtn.addEventListener("click", getQuotes);
-getQuotes();
-
-// Дополнительный функционал на выбор ToDo List
-const list = document.querySelector(".toDo-list");
-const todoBtn = document.querySelector(".toDo-btn");
-const toDoContainer = document.querySelector(".toDo");
-const todoInput = document.getElementById("toDoInput");
-
-//Язык кнопки 
-const setLenguageInTODOBtn = () => {
-    const todoBtn = document.querySelector(".toDo-btn"); 
-    todoBtn.textContent = appLang.ToDo[0]; 
-    todoSubmit.value = appLang.ToDo[1]; 
-}
-setLenguageInTODOBtn();
-
-//Показать/скрыть список дел 
-toDoContainer.addEventListener("click", (e)=>{
-    e.stopPropagation(); 
-})
-
-document.body.addEventListener("click", ()=>{
-    if (toDoContainer.classList.contains("toDo_active")) {
-        toDoContainer.classList.remove("toDo_active");
-    } return false; 
-})
-
-const showToDoList = (e) => {
-    e.stopPropagation(); 
-    if (toDoContainer.classList.contains("toDo_active")) {
-        toDoContainer.classList.remove("toDo_active");
-    } else {
-        toDoContainer.classList.add("toDo_active");
-    }
-}
-todoBtn.addEventListener("click", showToDoList);
-
-// Создаем экземпляр задачи
-const createToDo = (todoText) => {
-    const li = document.createElement("li");
-    li.classList.add("todo-item");
-    li.insertAdjacentHTML(
-        `afterbegin`,
-        `
-        <div class="list_buttons">
-            <i class="far fa-check-square"></i>
-            <i class="fas fa-times"></i>
-            <i class="fas fa-trash-alt"></i>
-        </div>
-        <p class="item_text">${todoText}</p>
-        `);
-    return li;
-}
-
-//Добавляем задачу в список 
-const addToDo = () => {
-    if (todoInput.value === "") {
-        return false;
-    }
-    const newTask = createToDo(todoInput.value);
-    todoInput.value = "";
-    todoInput.focus();
-    list.append(newTask);
-}
-todoSubmit.addEventListener("click", addToDo);
-
-//Управление задачей
-const handleToDo = (e) => {
-    if (e.target.classList.contains("fa-trash-alt")) {
-        e.target.parentElement.parentElement.remove();
-    }
-    if (e.target.classList.contains("fa-times")) {
-        e.target.parentElement.parentElement.classList.add('todo-failed');
-        e.target.previousElementSibling.remove();
-        e.target.remove();
-    }
-    if (e.target.classList.contains("fa-check-square")) {
-        e.target.parentElement.parentElement.classList.add('todo-done');
-        e.target.nextElementSibling.remove();
-        e.target.remove();
-    }
-}
-list.addEventListener("click", handleToDo);
-
-// Устанавлием список дел в LocalStorage
-const setToDoLocalStorage = () => {
-    localStorage.setItem("listToDo", list.innerHTML);
-}
-// Получаем имя из setLoca lStorage
-const getToDoLocalStorage = () => {
-    if (localStorage.getItem('listToDo')) {
-        list.innerHTML = localStorage.getItem('listToDo');
-    }
-}
-
-window.addEventListener('beforeunload', setToDoLocalStorage);
-window.addEventListener('load', getToDoLocalStorage);
 
 showTime();
