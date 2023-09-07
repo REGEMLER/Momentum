@@ -16,12 +16,12 @@ const playList = [
         src: 'assets/sounds/Ennio Morricone.mp3',
         duration: '01:37',
         id: 2
-      },
-      {      
+    },
+    {      
         title: 'Summer Wind',
         src: 'assets/sounds/Summer Wind.mp3',
         duration: '01:50',
         id: 3 
-      }
+    }
   ]
-  export default playList;
+export default playList;

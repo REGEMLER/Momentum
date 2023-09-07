@@ -11,6 +11,7 @@ body {
     min-height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
 }
 
@@ -22,6 +23,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 5px;
 }
 
 .flag {
@@ -30,11 +32,9 @@ body {
     background-image: url(../assets/free-icon-united-kingdom-197374.png);
     background-repeat: no-repeat;
     background-size: cover;
-    margin-right: 5px;
 }
 
 .lenguage-text {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     font-weight: 500;
     color: white;
@@ -55,38 +55,18 @@ body {
     transition: all 1s linear;
 }
 
-.player-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.player-btn {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.player-btn img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-}
-
 .play-title {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 32px;
     font-weight: 700;
     color: white;
-    margin: 10px 20px;
+    margin: 15px auto;
+    text-align: center;
 }
-
 
 .progress-container {
     width: 300px;
-    height: 14px;
-    background-color: transparent;
+    height: 8px;
+    background-color: #fafafa;
     border: 1px solid white;
     border-radius: 5px;
     display: flex;
@@ -96,28 +76,34 @@ body {
 }
 
 .progress-inner {
-    background-color: rgb(41, 182, 41);
-    height: 8px;
-    border-radius: 5px;
+    background-color: #2c3d5a;
+    height: 6px;
+    border-radius: 4px;
 }
 
 .player-time {
     display: flex;
-    justify-content: flex-end;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    justify-content: center;
+    gap: 5px;
     font-size: 20px;
     color: white;
 }
 
 .player-time span {
     padding: 2px;
+}
 
+.sounds{
+    max-width: 350px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 .sound-container {
     width: 300px;
-    height: 14px;
-    background-color: transparent;
+    height: 8px;
+    background-color: #fafafa;
     border: 1px solid white;
     border-radius: 5px;
     display: flex;
@@ -128,29 +114,61 @@ body {
 }
 
 .sound-inner {
-    background-color: blue;
-    height: 8px;
-    border-radius: 5px;
+    background-color: #423c3c;
+    height: 6px;
+    border-radius: 4px;
     width: 50%;
 }
 
 .mute {
     display: flex;
     justify-content: flex-end;
-    width: 300px;
-    margin: 5px;
-}
-
-.player-sound {
+    box-sizing: border-box;
     width: 30px;
     height: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: #fff;
     cursor: pointer;
+    object-fit: cover;
+    transition: all linear .3s;
+}
+
+.mute:active {
+    transform: scale(0.9);
 }
 
 .player-sound_img {
-    width: 30px;
-    height: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.player-btn {
+    box-sizing: border-box;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
     object-fit: cover;
+    transition: all linear .3s;
+}
+
+.player-btn:active {
+    transform: scale(0.9);
+}
+
+.player-btn img {
+    width: 100%;
+    height: 100%;
 }
 
 .play-list {
