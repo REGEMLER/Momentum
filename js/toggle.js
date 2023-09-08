@@ -59,3 +59,9 @@ const showQuote = () => {
     show(document.querySelector(".footer-quote"), isQuote);
 }
 isQuote.addEventListener("input", showQuote);
+
+const isSongs = document.getElementById("forSongs");
+const showSongs = () => {
+    show(document.querySelector(".play-list"), isSongs);
+}
+isSongs.addEventListener("input", showSongs);

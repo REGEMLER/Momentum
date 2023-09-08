@@ -22,6 +22,7 @@ const setLenguageInSettings = () => {
     const timeLabel = document.getElementById("timeLabel"); 
     const greatingLabel = document.getElementById("greatingLabel"); 
     const quoteLabel = document.getElementById("quoteLabel");
+    const playListLabel = document.getElementById("playListLabel");
     adjText1.textContent = appLang.settings[0]; 
     adjText2.textContent = appLang.settings[1];  
     adjText3.textContent = appLang.settings[2]; 
@@ -31,6 +32,7 @@ const setLenguageInSettings = () => {
     timeLabel.textContent = appLang.settings[6]; 
     greatingLabel.textContent = appLang.settings[7]; 
     quoteLabel.textContent = appLang.settings[8];  
+    playListLabel.textContent = appLang.settings[9];  
 }
 setLenguageInSettings();
 

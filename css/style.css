@@ -172,20 +172,27 @@ body {
 }
 
 .play-list {
-    list-style: none;
-    width: 100%;
-    margin: 20px auto;
+    max-width: 70%;
+    max-height: 150px;
+    margin: 10px auto 0 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* overflow-y: scroll; */
 }
 
 .play-item {
     position: relative;
+    display: block;
+    width: 100%;
     padding: 5px;
     padding-left: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     color: white;
     list-style: none;
     cursor: pointer;
+    outline: 1px solid green;
+    z-index: 5;
 }
 
 .play-item_active {
@@ -201,10 +208,10 @@ body {
 }
 
 .weather {
-    row-gap: 5px;
     width: 180px;
     min-height: 180px;
     text-align: left;
+    row-gap: 5px;
     transition: all 1s linear;
 }
 
@@ -365,12 +372,12 @@ body {
     cursor: pointer;
     text-align: center;
     margin-bottom: 15px;
+    object-fit: cover;
 }
 
 .footer-adj img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 /* Ссылка на задание и на гитхаб  */
@@ -381,12 +388,12 @@ body {
     height: 50px;
     cursor: pointer;
     text-align: center;
+    object-fit: cover;
 }
 
 .footer-rs img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
 /* Цитаты */
@@ -607,6 +614,8 @@ body {
 }
 
 .invisible {
+    position: relative;
+    z-index: -1;
     opacity: 0;
     visibility: hidden;
     transition: 1s all linear;

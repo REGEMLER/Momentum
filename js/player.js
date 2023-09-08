@@ -12,9 +12,11 @@ const playMenu = document.getElementById("play-list");
 songDuration.textContent = playList[playNum].duration;
 
 // Основная функция включает и выключает песню 
-const playAudio = () => {
+const playAudio = (e) => {
     const songTitle = document.querySelector('.play-title');
     const audioItems = document.querySelectorAll(".play-item");
+    const container = document.querySelector(".progress-container");
+    const progress = document.querySelector(".progress-inner");
     audioItems.forEach(item => {
         item.classList.remove("play-item_active");
     });
@@ -23,14 +25,28 @@ const playAudio = () => {
     audio.src = playList[playNum].src;
     songTitle.textContent = playList[playNum].title;
     songDuration.textContent = playList[playNum].duration;
+    let durationArray = playList[playNum].duration.split(":").map( item => {
+        let newArr = item.split("");
+        if(newArr[0] === "0") newArr.shift();
+        return newArr.join("");
+    })
+    const [mins, secs] = durationArray;
+    const duration = +mins * 60 + +secs
+    const width = progress.clientWidth * 100 / container.clientWidth;
+    const time = width * duration / 100;
+    let durationSeconds = Math.floor(time % 60);
+    let durationMin = Math.floor(time / 60);
     audio.muted = false;
-    // audio.volume = 0.5;
-    // console.log( audio.volume)
+    audio.volume = 0.5;
     if (isPlaying) {
-        audio.pause();
         icon.src = "assets/premium-icon-play-button-4980098.png";
+        songCurrentDuration.textContent = `${String(durationMin).padStart(2, "0")}:${String(durationSeconds).padStart(2, "0")}`;
+        audio.pause();
         isPlaying = false;
     } else {
+        if(e.target.closest === playButton || e.target.id === "playIcon"){
+            audio.currentTime = time;
+        }
         audio.play();
         icon.src = "assets/free-icon-video-pause-button-16427.png";
         isPlaying = true;
@@ -38,27 +54,25 @@ const playAudio = () => {
 }
 
 //Переключение песен
-const playNext = () => {
+const playNext = (e) => {
     if (playNum >= playList.length - 1) {
         playNum = 0;
         isPlaying = false;
-        playAudio();
     } else {
         playNum++;
         isPlaying = false;
-        playAudio();
     }
+    playAudio(e);
 }
-const playPrev = () => {
+const playPrev = (e) => {
     if (playNum <= 0) {
         playNum = playList.length - 1;
         isPlaying = false;
-        playAudio();
     } else {
         playNum--;
         isPlaying = false;
-        playAudio();
     }
+    playAudio(e);
 }
 //Создаем список песен 
 const createPlayer = (elem) => {
@@ -68,8 +82,11 @@ const createPlayer = (elem) => {
     li.id = elem.id;
     playMenu.append(li);
 }
-playList.forEach(item => {
-    createPlayer(item);
+
+window.addEventListener('load', () => {
+    playList.forEach(item => {
+        createPlayer(item);
+    });
 });
 
 playButton.addEventListener("click", playAudio);
@@ -90,7 +107,10 @@ const getProgress = (event) => {
     progress.style.width = `${progressPercent}%`;
     let durationSeconds = Math.floor(currentTime % 60);
     let durationMin = Math.floor(currentTime / 60);
-    songCurrentDuration.textContent = `${durationMin}:${durationSeconds}`
+    // console.log(duration)
+    if(isPlaying){
+        songCurrentDuration.textContent = `${String(durationMin).padStart(2, "0")}:${String(durationSeconds).padStart(2, "0")}`;
+    }
 }
 audio.addEventListener("timeupdate", getProgress);
 
@@ -109,7 +129,7 @@ const changeSong = (event) => {
     if (id) {
         playNum = id;
         isPlaying = false;
-        playAudio();
+        playAudio(event);
     }
     return false;
 }
