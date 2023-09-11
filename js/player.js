@@ -107,7 +107,7 @@ const getProgress = (event) => {
     progress.style.width = `${progressPercent}%`;
     let durationSeconds = Math.floor(currentTime % 60);
     let durationMin = Math.floor(currentTime / 60);
-    // console.log(duration)
+    console.log(duration)
     if(isPlaying){
         songCurrentDuration.textContent = `${String(durationMin).padStart(2, "0")}:${String(durationSeconds).padStart(2, "0")}`;
     }

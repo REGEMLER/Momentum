@@ -177,7 +177,6 @@ body {
     margin: 10px auto 0 0;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     overflow-y: auto;
 }
 
@@ -191,8 +190,12 @@ body {
     color: white;
     list-style: none;
     cursor: pointer;
-    outline: 1px solid green;
     z-index: 5;
+    transition: all linear .4s;
+}
+
+.play-item:hover {
+    background-color: #55D11D;
 }
 
 .play-item_active {
