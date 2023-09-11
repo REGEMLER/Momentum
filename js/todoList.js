@@ -66,6 +66,12 @@ const addToDo = () => {
 }
 todoSubmit.addEventListener("click", addToDo);
 
+todoInput.addEventListener('keydown', (e) => {
+    if (e.keyCode === 13) {
+        addToDo(e)
+    }
+});
+
 //Управление задачей
 const handleToDo = (e) => {
     if (e.target.classList.contains("fa-trash-alt")) {
@@ -80,6 +86,18 @@ const handleToDo = (e) => {
         e.target.parentElement.parentElement.classList.add('todo-done');
         e.target.nextElementSibling.remove();
         e.target.remove();
+    }
+    if (e.target.classList.contains("item_text")) {
+        const input = document.createElement("input");
+        input.classList.add("todo_change");
+        input.value = e.target.textContent;
+        e.target.replaceWith(input);
+        input.addEventListener("change", () => {
+            const p = document.createElement("p");
+            p.classList.add("item_text");
+            p.textContent = input.value
+            input.replaceWith(p);
+        })
     }
 }
 list.addEventListener("click", handleToDo);

@@ -178,7 +178,7 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    /* overflow-y: scroll; */
+    overflow-y: auto;
 }
 
 .play-item {
@@ -510,6 +510,11 @@ body {
     background-image: linear-gradient(#FDFF94, #733407);
     margin-top: 10px;
     cursor: pointer;
+    transition: all linear .4s;
+}
+
+#toDoSubmit:active{
+    transform: scale(0.9);
 }
 
 .toDo-list {
@@ -517,6 +522,8 @@ body {
     margin: 0 auto;
     margin-top: 20px;
     list-style: none;
+    max-height: 55vh;
+    overflow-y: auto;
 }
 
 .todo-item {
@@ -531,11 +538,28 @@ body {
     position: relative;
 }
 
-.todo-text {
+.item_text {
+    color: #fff;
+    cursor: pointer;
+}
+
+.todo_change{
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    height: 10px;
+    background-color: #fff;
+    z-index: 2;
     padding: 10px;
+    text-align: center;
+}
+
+.todo_invisible{
+    display: none;
 }
 
 .list_buttons {
+    width: 100%;
     display: flex;
     justify-content: center;
     gap: 10px;
