@@ -1,5 +1,4 @@
 import greetingTranslation from './lang.js';
-import { showPlayer } from './toggle.js';
 import { getWeather, getQuotes, getCityLocalStorage } from './weather.js';
 import { setLenguageInTODOBtn } from './todoList.js';
 
@@ -88,7 +87,6 @@ const showTime = () => {
     elemTime.textContent = currentTime;
     showDate();
     setGreating();
-    showPlayer();
     setTimeout(showTime, 1000);
 }
 

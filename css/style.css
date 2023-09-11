@@ -601,7 +601,7 @@ body {
     border-radius: 5px;
     opacity: 0;
     visibility: hidden;
-    z-index: 2;
+    z-index: -1;
     transform: translateX(-105%);
     transition: all 1s linear;
 }
@@ -611,6 +611,7 @@ body {
     transform: translateX(0);
     visibility: visible;
     opacity: 0.8;
+    z-index: 10;
     transition: all 1s linear;
 }
 

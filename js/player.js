@@ -1,4 +1,5 @@
 import playList from './playList.js';
+import { show } from './toggle.js';
 
 let playNum = 0;
 let isPlaying = false;
@@ -25,6 +26,7 @@ const playAudio = (e) => {
     audio.src = playList[playNum].src;
     songTitle.textContent = playList[playNum].title;
     songDuration.textContent = playList[playNum].duration;
+    //вычисление реальной продолжительности песни
     let durationArray = playList[playNum].duration.split(":").map( item => {
         let newArr = item.split("");
         if(newArr[0] === "0") newArr.shift();
@@ -36,8 +38,18 @@ const playAudio = (e) => {
     const time = width * duration / 100;
     let durationSeconds = Math.floor(time % 60);
     let durationMin = Math.floor(time / 60);
+    //работа со звуком по умолчанию
     audio.muted = false;
     audio.volume = 0.5;
+    // скрыть отобразить список песен при переключении 
+    document.getElementById("forSongs").checked = true; 
+    show(document.querySelector(".play-list"), document.getElementById("forSongs"));
+    setTimeout(() => {
+        if(document.getElementById("forSongs").checked){
+            document.getElementById("forSongs").checked = false; 
+            document.querySelector(".play-list").classList.add("invisible");
+        }
+    }, 3000);
     if (isPlaying) {
         icon.src = "assets/premium-icon-play-button-4980098.png";
         songCurrentDuration.textContent = `${String(durationMin).padStart(2, "0")}:${String(durationSeconds).padStart(2, "0")}`;
@@ -107,7 +119,6 @@ const getProgress = (event) => {
     progress.style.width = `${progressPercent}%`;
     let durationSeconds = Math.floor(currentTime % 60);
     let durationMin = Math.floor(currentTime / 60);
-    console.log(duration)
     if(isPlaying){
         songCurrentDuration.textContent = `${String(durationMin).padStart(2, "0")}:${String(durationSeconds).padStart(2, "0")}`;
     }

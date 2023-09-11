@@ -8,7 +8,8 @@ menu.addEventListener("click", (e)=>{
 document.body.addEventListener("click", ()=>{
     if(menu.classList.contains(`adj_active`)){
         menu.classList.remove(`adj_active`);
-    } return false; 
+    }  
+    return false; 
 })
 
 const showAdj = (e) => {
@@ -21,7 +22,7 @@ const showAdj = (e) => {
 }
 btn.addEventListener("click",showAdj);
 
-function show(block, flag){
+export function show(block, flag){
     if(flag.checked){
         block.classList.remove("invisible");
     } else {
